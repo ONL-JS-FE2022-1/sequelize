@@ -63,3 +63,12 @@ module.exports.updateUser = async(req, res, next) => {
         next(error);
     }
 }
+
+/*
+Tasks
+
+- body - string: not null, not empty
+- isDone - boolean: not null
+- deadline - date: isDate true
+
+*/
