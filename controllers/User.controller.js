@@ -1,4 +1,4 @@
-const {User} = require('../models');
+const {User, Group} = require('../models');
 
 module.exports.createUser = async (req, res, next) => {
     try {
@@ -74,5 +74,17 @@ module.exports.updateUser = async(req, res, next) => {
         return res.status(200).send(result);
     } catch (error) {
         next(error)
+    }
+}
+
+module.exports.getUserWithGroups = async (req, res, next) => {
+    try {
+        const {params: {userId}} = req;
+        const userWithGroups = await User.findByPk(userId, {
+            include: [Group]
+        });
+        res.status(200).send(userWithGroups);
+    } catch (error) {
+        next(error);
     }
 }
