@@ -32,11 +32,11 @@ module.exports.findOnePK = async(req, res, next) => {
 
 module.exports.deleteByPK = async(req, res, next) => {
     try {
-        const {params: {id}} = req;
+        const {params: {userId}} = req;
         const rowsCount = await User.destroy(
             {
                where: {
-                    id
+                    id: userId
                 }
             }
         )
