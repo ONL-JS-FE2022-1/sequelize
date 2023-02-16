@@ -48,10 +48,7 @@ module.exports.deleteUserFromGroup = async(req, res, next) => {
 module.exports.getGroupWithMembers = async (req, res, next) => {
     try {
         const {params: {groupId}} = req;
-        const group = await Group.findAll({
-            where: {
-                id: groupId
-            },
+        const group = await Group.findByPk(groupId, {
             include: [{
                 model: User,
                 attributes: {
