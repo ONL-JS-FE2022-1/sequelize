@@ -1,4 +1,4 @@
-const {Group} = require('../models/');
+const {Group, User} = require('../models/');
 
 module.exports.createGroup = async(req, res, next) => {
     try {
@@ -40,6 +40,26 @@ module.exports.deleteUserFromGroup = async(req, res, next) => {
             return res.status(200).send('User succesully deleted');
         }
         return res.status(200).send('User is never been in this group');
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports.getGroupWithMembers = async (req, res, next) => {
+    try {
+        const {params: {groupId}} = req;
+        const group = await Group.findAll({
+            where: {
+                id: groupId
+            },
+            include: [{
+                model: User,
+                attributes: {
+                    exclude: ['password']
+                }
+            }]
+        })
+        res.status(200).send(group);
     } catch (error) {
         next(error);
     }
