@@ -22,7 +22,7 @@ groupRouter.post('/', GroupController.createGroup);
 groupRouter.put('/:userId/:groupId', getUserInstance, GroupController.addUserToGroup);
 groupRouter.get('/:userId', getUserInstance, GroupController.getUserGroups);
 groupRouter.delete('/:userId/:groupId', getUserInstance, GroupController.deleteUserFromGroup);
-groupRouter.get('/members/:groupId', GroupController.getGroupWithMembers);
+groupRouter.get('/:groupId/members/', GroupController.getGroupWithMembers);
 groupRouter.post('/:groupId', upload.single('groupAvatar'), GroupController.createGroupImage);
 
 module.exports = groupRouter;
